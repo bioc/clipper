@@ -16,9 +16,15 @@
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
 extractCliquesFromDag <- function(dag, root=NULL) {
+  if (sum(diag(as(dag,"matrix")))!=0){
+    dag <- removeSelfLoops(dag)
+  }
   moral <- moralize.graphNEL(dag)
   tg    <- triangulate.graphNEL(moral)
-  rip.graphNEL(tg, root=root)$cliques
+  ripped <- rip.graphNEL(tg, root=root)
+  if (length(ripped)==0)
+    return(NULL)
+  ripped$cliques
 }
 
 symbolCount <- function(x,complete=NULL) {

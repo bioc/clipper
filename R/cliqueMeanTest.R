@@ -29,6 +29,10 @@ cliqueMeanTest <- function(expr, classes, graph, nperm, alphaV=0.05, b=100, root
   
   cvt     <- runVarianceTest(expr, classes, graph, nperm, root, permute)
 
+  if (is.null(cvt)){
+    return(NULL)
+  }
+  
   check   <- cvt$alpha <= alphaV
   cliques <- cvt$cliques
   

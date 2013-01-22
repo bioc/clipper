@@ -19,6 +19,12 @@ runVarianceTest <- function(expr, classes, graph, nperm, root, permute) {
 
   gns  <- colnames(expr)
   cliques <- extractCliquesFromDag(graph, root=root)
+
+  if (is.null(cliques)){
+    warning("No cliques available or the DAG provided can not be ripped. Please check if your input graph is a DAG.")
+    return(NULL)
+  }
+  
   maxcliques <- max(sapply(cliques, length))
   
   ncl1 <- sum(classes==2)

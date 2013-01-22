@@ -40,6 +40,11 @@ clipper <- function(expr, classes, graph, method=c("variance","mean"), nperm=100
                mean     = cliqueMeanTest)
   
   ct <- fu(expr, classes, graph, nperm, alphaV, b, root, permute)
+
+  if (is.null(ct)){
+    return(NULL)
+  }
+  
   jtp <- getJunctionTreePaths(graph, root)
   
   if (is.null(jtp))

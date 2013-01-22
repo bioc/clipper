@@ -16,9 +16,12 @@
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
 getJunctionTreePaths <- function(graph, root=NULL) {
+  if (sum(diag(as(graph,"matrix")))!=0){
+    graph <- removeSelfLoops(graph)
+  }
   ripped <- rip.graphNEL(triangulate.graphNEL(moralize.graphNEL(graph)), root=root)
   if (length(ripped)==0){
-    warning("The DAG provided can not be ripped.")
+    warning("The DAG provided can not be ripped. Please check if your input graph is a DAG.")
     return(NULL)
   }
   cliques <- ripped$cliques

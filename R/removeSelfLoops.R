@@ -15,23 +15,8 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
-getGraphEntryGenes <- function(graph, byCliques=FALSE, root=NULL){
-  graphi <- igraph.from.graphNEL(graph)
-  edgeM  <- get.edgelist(graphi)
-  genes  <- nodes(graph)
-  starts <- extractStarts(edgeM, genes)
-
-  cliques <- extractCliquesFromDag(graph, root=root)
-
-  if (is.null(cliques)){
-    warning("No cliques available or the DAG provided can not be ripped. Please check if your input graph is a DAG.")
-    return(NULL)
-  }
-  
-  startOnClique <- lapply(cliques, function(x) intersect(starts,x))
-
-  if (byCliques)
-    return(startOnClique)
-  return(starts)
+removeSelfLoops <- function(dag){
+  adjMatrix <- as(dag,"matrix")
+  diag(adjMatrix) <- 0
+  as(as(adjMatrix,"graphAM"),"graphNEL")
 }
-
