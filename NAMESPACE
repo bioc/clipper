@@ -21,10 +21,9 @@ importClassesFrom(Biobase, ExpressionSet)
 importMethodsFrom(Biobase, exprs)
 
 importFrom(corpcor, cov.shrink)
-importFrom(graph, nodes, subGraph, edgemode)
 importFrom(qpgraph, qpIPF)
 importFrom(igraph, igraph.from.graphNEL, get.edgelist, get.all.shortest.paths, graph)
 importFrom(RBGL, maxClique)
 importFrom(gRbase, moralize.graphNEL, triangulate.graphNEL, rip.graphNEL)
 
-export(cliqueVarianceTest, cliqueMeanTest, getGraphEntryGenes, getJunctionTreePaths, pathQ, clipper, prunePaths, plotInCytoscape, nameCliques, deleteEdge, edgemode)
+export(cliqueVarianceTest, cliqueMeanTest, getGraphEntryGenes, getJunctionTreePaths, pathQ, clipper, prunePaths, plotInCytoscape, nameCliques, deleteEdge)
