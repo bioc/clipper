@@ -15,8 +15,13 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
-removeSelfLoops <- function(dag){
-  adjMatrix <- as(dag,"matrix")
-  diag(adjMatrix) <- 0
-  as(as(adjMatrix,"graphAM"),"graphNEL")
+removeSelfLoops <- function(graph){
+  edgeL <- graph@edgeL
+  for (i in 1:length(edgeL)) {
+    pos <- match(i,edgeL[[i]]$edges)
+    if (!(is.na(pos)))
+      edgeL[[i]]$edges <- edgeL[[i]]$edges[-pos]
+  }  
+  graph@edgeL <- edgeL
+  return(graph)
 }
