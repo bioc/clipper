@@ -1,4 +1,4 @@
-\name{getJunctionTreePaths.R}
+\name{getJunctionTreePaths}
 \alias{getJunctionTreePaths}
 \title{Extract the shortest paths along the junction tree of the graph.}
 

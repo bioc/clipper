@@ -1,4 +1,4 @@
-\name{deleteEdge.R}
+\name{deleteEdge}
 \alias{deleteEdge}
 \title{Remove an edge from \code{graphNel} object.}
 

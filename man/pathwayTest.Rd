@@ -1,4 +1,4 @@
-\name{pathwayTest.R}
+\name{pathwayTest}
 \alias{pathQ}
 \title{Whole pathway test using qpipf.}
 \description{Performs variance and mean test using qpipf on the whole pathway.}

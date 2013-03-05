@@ -1,4 +1,4 @@
-\name{cliqueMeanTest.R}
+\name{cliqueMeanTest}
 \alias{cliqueMeanTest}
 \title{Mean test for cliques.}
 \description{It decomposes the graph in cliques and performs the mean test in every one.}

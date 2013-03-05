@@ -1,4 +1,4 @@
-\name{cliqueVarianceTest.R}
+\name{cliqueVarianceTest}
 \alias{cliqueVarianceTest}
 \title{Variance test for cliques.}
 \description{It decomposes the graph in cliques and performs the variance test in every one.}

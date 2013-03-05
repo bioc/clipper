@@ -1,4 +1,4 @@
-\name{clipper.R}
+\name{clipper}
 \alias{clipper}
 \title{Dissect the pathway to find the path with the greatest
   association with phenotype.}

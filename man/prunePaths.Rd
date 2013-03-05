@@ -1,4 +1,4 @@
-\name{prunePaths.R}
+\name{prunePaths}
 \alias{prunePaths}
 \title{Summarize the paths obtained by clipper according to their similarity.}
 \description{This function allows the user to chose only one

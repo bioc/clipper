@@ -1,4 +1,4 @@
-\name{dag-graph.R}
+\name{nameCliques}
 \alias{nameCliques}
 \title{Generate clique names from their own elements.}
 

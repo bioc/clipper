@@ -1,4 +1,4 @@
-\name{getGraphEntryGenes.R}
+\name{getGraphEntryGenes}
 \alias{getGraphEntryGenes}
 \title{Extract all the possible entry point (genes with no entering edges) from graph.}
 \description{It extracts the possible entry point of the graph. Entry
