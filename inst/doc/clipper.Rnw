@@ -195,6 +195,21 @@ After the export of the pathway to Cytoscape, you can choose between different l
 \end{figure}
 
 
+\section{Easy clipper analysis}
+The package provides also a function to easily run the analysis described in \textit{Martini et al. 2012}. This analysis is able to start from a expression matrix and a pathway and returns the paths in the pathway that are altered between the two conditions.
+
+<<easyClip usage>>=
+clipped <- easyClip(exp, classes, graph, method="mean")
+clipped[,1:5]
+@
+
+A short summary of the results can be obtained with easyLook function.
+
+<<easylook usage>>=
+easyLook(clipped)
+@
+
+
 \section{Bibliography}
 \begin{thebibliography}{3}
   

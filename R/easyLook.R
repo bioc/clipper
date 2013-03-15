@@ -15,15 +15,13 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
-importFrom(methods, as)
 
-importClassesFrom(Biobase, ExpressionSet)
-importMethodsFrom(Biobase, exprs)
-
-importFrom(corpcor, cov.shrink)
-importFrom(qpgraph, qpIPF)
-importFrom(igraph, igraph.from.graphNEL, get.edgelist, get.all.shortest.paths, graph)
-importFrom(RBGL, maxClique)
-importFrom(gRbase, moralize.graphNEL, triangulate.graphNEL, rip.graphNEL)
-
-export(cliqueVarianceTest, cliqueMeanTest, getGraphEntryGenes, getJunctionTreePaths, pathQ, clipper, prunePaths, easyClip, plotInCytoscape, nameCliques, deleteEdge, easyLook)
+easyLook <- function (clipped) {
+  if (is.null(clipped))
+    return(NULL)
+  for (i in 1:NROW(clipped)) {
+    genes <- unique(unlist(strsplit(clipped[i,"involvedGenes"],";")))
+    clipped[i,"involvedGenes"] <- paste(genes, collapse=";")
+  }
+  clipped[,c("maxScore", "involvedGenes")]
+}
