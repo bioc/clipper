@@ -46,6 +46,9 @@ prunePaths <- function(pathSummary, thr=NULL, clust=NULL, sep=";"){
     return(NULL)
   }
 
+  if(NROW(pathSummary) == 0)
+    return(NULL)
+  
   if(NROW(pathSummary) == 1)
     return(pathSummary)
 
