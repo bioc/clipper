@@ -29,6 +29,12 @@ setMethod("getExpression",
             if (!all((classes == 1 | classes == 2)))
               stop("Class vector should be made by either '1' or '2'.")
 
+            if (sum(classes==1) < 3)
+              stop("Too few sample on class 1.")
+
+            if (sum(classes==2) < 3)
+              stop("Too few sample on class 1.")
+
             t(expr)
           })
 
