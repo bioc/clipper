@@ -122,6 +122,7 @@ all <- all[(!is.na(row.names(exprs(all))))]
 At this point, we compute the intersection between pathway nodes and the genes for which an expression value is available. Thus we obtain a subgraph of the original graph. Moreover, we can extract from the expression set a smaller expression set corresponding to the expression of the genes in the pathway under investigation.
 <<obtainingTheSubgraph>>=
 genes <- intersect(genes, row.names(exprs(all)))
+library(graph)
 graph <- subGraph(genes, graph)
 exp <- all[genes,,drop=FALSE]
 exp
