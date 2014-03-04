@@ -1,11 +1,24 @@
-Package:     clipper
-Version: 1.3.1
-Date:        2013-03-14
-Title:       Gene set analysis exploiting pathway topology
-Author:      Paolo Martini <paolo.cavei@gmail.com>, Gabriele Sales <gabriele.sales@unipd.it>, Chiara Romualdi <chiara.romualdi@unipd.it>
-Maintainer:  Paolo Martini <paolo.cavei@gmail.com>
-Description: clipper is a package for topological gene set analysis. It implements a two-step empirical approach based on the exploitation of graph decomposition into a junction tree to reconstruct the most relevant signal path. In the first step clipper selects significant pathways according to statistical tests on the means and the concentration matrices of the graphs derived from pathway topologies. Then, it "clips" the whole pathway identifying  the signal paths having the greatest association with a specific phenotype.
-Depends:     R (>= 2.15.0), Matrix, graph
-Imports:     methods,  Biobase, igraph, gRbase (>= 1.6.6), qpgraph, KEGGgraph, corpcor, RBGL
-Suggests:    RUnit, BiocGenerics, RCytoscape (>= 1.6.3), graphite, ALL, hgu95av2.db
-License:     AGPL-3
+Package: clipper
+Version: 1.3.2
+Date: 2013-03-14
+Title: Gene set analysis exploiting pathway topology
+Author: Paolo Martini <paolo.cavei@gmail.com>, Gabriele Sales
+        <gabriele.sales@unipd.it>, Chiara Romualdi
+        <chiara.romualdi@unipd.it>
+Maintainer: Paolo Martini <paolo.cavei@gmail.com>
+Description: clipper is a package for topological gene set analysis. It
+        implements a two-step empirical approach based on the
+        exploitation of graph decomposition into a junction tree to
+        reconstruct the most relevant signal path. In the first step
+        clipper selects significant pathways according to statistical
+        tests on the means and the concentration matrices of the graphs
+        derived from pathway topologies. Then, it "clips" the whole
+        pathway identifying the signal paths having the greatest
+        association with a specific phenotype.
+Depends: R (>= 2.15.0), Matrix, graph
+Imports: methods, Biobase, igraph, gRbase (>= 1.6.6), qpgraph,
+        KEGGgraph, corpcor, RBGL
+Suggests: RUnit, BiocGenerics, RCytoscape (>= 1.6.3), graphite, ALL,
+        hgu95av2.db
+License: AGPL-3
+biocViews: Pathways
