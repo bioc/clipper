@@ -1,5 +1,5 @@
 Package: clipper
-Version: 1.3.2
+Version: 1.3.3
 Date: 2013-03-14
 Title: Gene set analysis exploiting pathway topology
 Author: Paolo Martini <paolo.cavei@gmail.com>, Gabriele Sales
@@ -17,7 +17,7 @@ Description: clipper is a package for topological gene set analysis. It
         association with a specific phenotype.
 Depends: R (>= 2.15.0), Matrix, graph
 Imports: methods, Biobase, igraph, gRbase (>= 1.6.6), qpgraph,
-        KEGGgraph, corpcor, RBGL
+        KEGGgraph, corpcor, RBGL, Rcpp
 Suggests: RUnit, BiocGenerics, RCytoscape (>= 1.6.3), graphite, ALL,
         hgu95av2.db
 License: AGPL-3
