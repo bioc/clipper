@@ -16,6 +16,7 @@
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
 importFrom(methods, as)
+importFrom(Rcpp, evalCpp)
 
 importClassesFrom(Biobase, ExpressionSet)
 importMethodsFrom(Biobase, exprs)
