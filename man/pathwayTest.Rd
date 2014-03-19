@@ -2,7 +2,8 @@
 \alias{pathQ}
 \title{Whole pathway test using qpipf.}
 \description{Performs variance and mean test using qpipf on the whole pathway.}
-\usage{pathQ(expr, classes, graph, nperm=100, alphaV=0.05, b=100, permute=TRUE)}
+\usage{pathQ(expr, classes, graph, nperm=100, alphaV=0.05, b=100,
+permute=TRUE, paired=FALSE, alwaysShrink=FALSE)}
 \arguments{
   \item{expr}{an expression  matrix or ExpressionSet with colnames for samples and
     rownames for expression features.}
@@ -15,8 +16,12 @@
   \item{permute}{always performs permutations in the concentration
     matrix test. If FALSE, the test is made using the asymptotic
     distribution of the log-likelihood ratio. This option should be use
-    only if samples size is >=40 per class.
-  }
+    only if samples size is >=40 per class.}
+  \item{paired}{perform the test for paired sample. It assumes that
+    class labels are ordered so that the first occurrence of class 2 is
+    paired with the first occurrence of class 1 and so on.}
+  \item{alwaysShrink}{always perform the shrinkage estimates of
+    variance.}
 }
 \value{a list with alphaVar (pvalue for the variance test) and alphaMean (pvalue for mean test).}
 

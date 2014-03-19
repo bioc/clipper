@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
-runVarianceTest <- function(expr, classes, graph, nperm, root, permute) {
+runVarianceTest <- function(expr, classes, graph, nperm, root, permute, alwaysShrink) {
 
   gns  <- colnames(expr)
   cliques <- extractCliquesFromDag(graph, root=root)
@@ -30,7 +30,7 @@ runVarianceTest <- function(expr, classes, graph, nperm, root, permute) {
   ncl1 <- sum(classes==2)
   ncl2 <- sum(classes==1)
 
-  shrink <- ncl1 < maxcliques || ncl2 < maxcliques
+  shrink <- ncl1 < maxcliques || ncl2 < maxcliques || alwaysShrink
 
   cov  <- estimateCov(expr[classes==2,, drop=FALSE], expr[classes==1,, drop=FALSE], shrink)
   
@@ -66,7 +66,7 @@ runVarianceTest <- function(expr, classes, graph, nperm, root, permute) {
   list(cov=cov, alpha=alpha, cliques=cliques)
 }
 
-cliqueVarianceTest <- function(expr, classes, graph, nperm, alphaV=0.05, b=100, root=NULL, permute=TRUE) {
+cliqueVarianceTest <- function(expr, classes, graph, nperm, alphaV=0.05, b=100, root=NULL, permute=TRUE, alwaysShrink=FALSE) {
   expr <- getExpression(expr, classes)
 
   genes <- nodes(graph)
@@ -78,7 +78,7 @@ cliqueVarianceTest <- function(expr, classes, graph, nperm, alphaV=0.05, b=100, 
   graph <- subGraph(genes, graph)
   expr <- expr[, genes, drop=FALSE]
   
-  res <- runVarianceTest(expr, classes, graph, nperm, root, permute)
+  res <- runVarianceTest(expr, classes, graph, nperm, root, permute, alwaysShrink)
   res$cov <- NULL
   res
 }

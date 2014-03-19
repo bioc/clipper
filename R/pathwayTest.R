@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
-runPathwayVar <- function(expr, classes, graph, nperm, permute) {
+runPathwayVar <- function(expr, classes, graph, nperm, permute, alwaysShrink) {
   e1 <- expr[classes==2,, drop=FALSE]
   e2 <- expr[classes==1,, drop=FALSE]
   
@@ -26,7 +26,7 @@ runPathwayVar <- function(expr, classes, graph, nperm, permute) {
   
   maxcliques <- max(sapply(cliques, length))
 
-  shrink <- sum(classes==1) < maxcliques || sum(classes==2) < maxcliques
+  shrink <- sum(classes==1) < maxcliques || sum(classes==2) < maxcliques || alwaysShrink
 
   cov <- estimateCov(e1, e2, shrink)
 
@@ -88,8 +88,14 @@ runPathwayVar <- function(expr, classes, graph, nperm, permute) {
   list(cov=cov, lambda=lambda, lambdaTeo=lambdaT, alpha=alpha, cliques=cliques)
 }
 
-pathQ <- function(expr, classes, graph, nperm=100, alphaV=0.05, b=100, permute=TRUE){
+pathQ <- function(expr, classes, graph, nperm=100, alphaV=0.05, b=100, permute=TRUE, paired=FALSE, alwaysShrink=FALSE){
   expr <- getExpression(expr, classes)
+
+  if (paired) {
+    if (sum(classes==1) != sum(classes==2)) {
+      stop("Your are working woth paired mode. The number of samples per class must be equal (and paired).")
+    }
+  }
   
   genes <- nodes(graph)
   genes <- intersect(genes, colnames(expr))
@@ -100,9 +106,9 @@ pathQ <- function(expr, classes, graph, nperm=100, alphaV=0.05, b=100, permute=T
   graph <- subGraph(genes, graph)
   expr <- expr[, genes, drop=FALSE]
   
-  varTest <- runPathwayVar(expr, classes, graph, nperm, permute)
+  varTest <- runPathwayVar(expr, classes, graph, nperm, permute, alwaysShrink)
   check <- varTest$alpha <= alphaV
-
+  
   if (is.na(check)){
     warning("Test on the concentration matrix is not calculable.")
     return(NA)
@@ -111,19 +117,35 @@ pathQ <- function(expr, classes, graph, nperm=100, alphaV=0.05, b=100, permute=T
   exp2 <- expr[classes==1,, drop=FALSE]
 
   cli.moral <- varTest$cliques
-  
-  stat.obs  <- hoteIPF(exp1, exp2, check, cli.moral)
-  stat.perm <- vector("numeric", nperm)
-  
-  for (i in seq_len(nperm)) {
 
-    ind          <- sample(NROW(expr))
-    exp1.perm    <- expr[ind[1:NROW(exp1)],, drop=FALSE]
-    exp2.perm    <- expr[ind[(NROW(exp1)+1):NROW(expr)],, drop=FALSE]
-    stat.perm[i] <- hoteIPF(exp1.perm, exp2.perm, check, cli.moral)
+  if (paired) {
+    
+    stat.obs <- hotePaired(exp1, exp2, cli.moral)
+    
+    stat.perm <- vector("numeric", nperm)
+    
+    for (i in seq_len(nperm)) {
+      stat.perm[i] <- hotePaired(exp1, sample(exp2), cli.moral, performPerm=TRUE, alwaysShrink)
+    }
+
+    alpha <- sum(stat.perm >= stat.obs) / nperm
+    varTest$alpha <- NULL
+    
+  } else {
+    
+    stat.obs  <- hoteIPF(exp1, exp2, check, cli.moral)
+    stat.perm <- vector("numeric", nperm)
+    
+    for (i in seq_len(nperm)) {
+      
+      ind          <- sample(NROW(expr))
+      exp1.perm    <- expr[ind[1:NROW(exp1)],, drop=FALSE]
+      exp2.perm    <- expr[ind[(NROW(exp1)+1):NROW(expr)],, drop=FALSE]
+      stat.perm[i] <- hoteIPF(exp1.perm, exp2.perm, check, cli.moral, alwaysShrink)
+    }
+    
+    alpha <- sum(stat.perm >= stat.obs) / nperm
   }
-
-  alpha <- sum(stat.perm >= stat.obs) / nperm
   
   list(alphaVar=varTest$alpha, alphaMean=alpha)
 }

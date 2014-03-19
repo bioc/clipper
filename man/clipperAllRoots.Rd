@@ -1,12 +1,12 @@
-\name{clipper}
-\alias{clipper}
+\name{clipperAllRoots}
+\alias{clipperAllRoots}
 \title{Dissect the pathway to find the path with the greatest
   association with phenotype.}
 \description{Basing on either variance or mean clique test, this
   function identifies the paths that are mostly related with the
   phenotype under study.}
-\usage{clipper(expr, classes, graph, method=c("variance","mean", "both",
-"paired"), nperm=100, alphaV=0.05, b=100, root=NULL, trZero=0.001, signThr=0.05,
+\usage{clipperAllRoots(expr, classes, graph, method=c("variance","mean",
+"both", "paired"), nperm=100, alphaV=0.05, b=100, trZero=0.001, signThr=0.05,
 maxGap=1, permute=TRUE)}
 \arguments{
   \item{expr}{an expression  matrix or ExpressionSet with colnames for
@@ -19,9 +19,6 @@ maxGap=1, permute=TRUE)}
   \item{nperm}{number of permutations. Default = 100.}
   \item{alphaV}{pvalue threshold for variance test to be used during mean test. Default = 0.05.}
   \item{b}{number of permutations for mean analysis. Default = 100.}
-  \item{root}{nodes by which rip ordering is performed (as far as
-    possible) on the variables using the maximum cardinality search
-    algorithm.}
   \item{trZero}{lowest pvalue detectable. This threshold avoids that
     -log(p) goes infinite.}
   \item{signThr}{significance threshold for clique pvalues.}
@@ -31,7 +28,6 @@ maxGap=1, permute=TRUE)}
     matrix test. If FALSE, the test is made using the asymptotic
     distribution of the log-likelihood ratio. This option should be use
     only if samples size is >=40 per class.}
-  
 }
 
 \details{
@@ -40,8 +36,11 @@ maxGap=1, permute=TRUE)}
   mean and variance p-values.
 }
 
-\value{A matrix with a row for each paths. Columns are organized
-  as follows:
+\value{A matrix with a row for each paths. Rownames have the form:
+
+  roots-paths.
+
+  Columns are organized as follows:
   \enumerate{
     \item Index of the starting clique
     \item Index of the ending clique
@@ -79,7 +78,7 @@ if (require(graphite) & require(ALL)){
   classes <- c(rep(1,10), rep(2,10))
   featureNames(all@assayData)<- genes
   graph <- subGraph(genes, graph)
-  clipped <- clipper(all, classes, graph, "var", trZero=0.01, permute=FALSE)
+  clipped <- clipperAllRoots(all, classes, graph, "var", trZero=0.01, permute=FALSE)
   clipped[,1:5]
 }
 }

@@ -1,13 +1,15 @@
-\name{cliqueMeanTest}
-\alias{cliqueMeanTest}
-\title{Mean test for cliques.}
-\description{It decomposes the graph in cliques and performs the mean test in every one.}
-\usage{cliqueMeanTest(expr, classes, graph, nperm, alphaV=0.05, b=100,
+\name{cliquePairedTest}
+\alias{cliquePairedTest}
+\title{Paired mean test for cliques.}
+\description{It decomposes the graph in cliques and performs the paired mean test in every one.}
+\usage{cliquePairedTest(expr, classes, graph, nperm, alphaV=0.05, b=100,
 root=NULL, permute=TRUE, alwaysShrink=FALSE)}
 \arguments{
   \item{expr}{an expression  matrix or ExpressionSet with colnames for
     samples and row name for genes.}
-  \item{classes}{vector of 1,2 indicating the classes of samples (columns).}
+  \item{classes}{vector of 1,2 indicating the classes of samples
+    (columns). It is assumed that class labels are ordered so that the first occurrence of class 2 is
+    paired with the first occurrence of class 1 and so on.}
   \item{graph}{a \code{graphNEL} object.}
   \item{nperm}{number of permutations.}
   \item{alphaV}{pvalue threshold for variance test to be used during mean test.}
@@ -22,7 +24,7 @@ root=NULL, permute=TRUE, alwaysShrink=FALSE)}
   \item{alwaysShrink}{always perform the shrinkage estimates of
     variance.}
 }
-\value{a list with alphas (vector of cliques pvalues based on the mean test) and cliques (list of the cliques and related elements).}
+\value{a list with alphas (vector of cliques pvalues based on the variance test) and cliques (list of the cliques and related elements).}
 
 \references{
   Martini P, Sales G, Massa MS, Chiogna M, Romualdi C. Along signal
@@ -44,6 +46,6 @@ if (require(graphite) & require(ALL)){
   classes <- c(rep(1,10), rep(2,10))
   featureNames(all@assayData)<- genes
   graph <- subGraph(genes, graph)
-  cliqueMeanTest(all, classes, graph, nperm=100, permute=FALSE)$alpha
+  cliquePairedTest(all, classes, graph, nperm=100, permute=FALSE)$alpha
 }
 }

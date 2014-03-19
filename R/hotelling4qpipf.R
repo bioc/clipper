@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
-hoteIPF <- function(exp1, exp2, exact, cliques) {
+hoteIPF <- function(exp1, exp2, exact, cliques, alwaysShrink=FALSE) {
   exp1.num <- nrow(exp1)
   exp2.num <- nrow(exp2)
   gene.num <- ncol(exp1)
@@ -24,7 +24,7 @@ hoteIPF <- function(exp1, exp2, exact, cliques) {
   exp2.bar <- colMeans(exp2)
   
   maxcliques <- max(sapply(cliques, length))
-  shrink <- exp1.num < maxcliques || exp2.num <maxcliques
+  shrink <- exp1.num < maxcliques || exp2.num <maxcliques || alwaysShrink
   cov <- estimateCov(exp1, exp2, shrink)
 
   exp1.s   <- cov$s1

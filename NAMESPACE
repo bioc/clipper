@@ -15,8 +15,9 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
+import(Matrix,graph,KEGGgraph,Rcpp)
+
 importFrom(methods, as)
-importFrom(Rcpp, evalCpp)
 
 importClassesFrom(Biobase, ExpressionSet)
 importMethodsFrom(Biobase, exprs)
@@ -27,4 +28,5 @@ importFrom(igraph, igraph.from.graphNEL, get.edgelist, get.all.shortest.paths, g
 importFrom(RBGL, maxClique)
 importFrom(gRbase, moralize.graphNEL, triangulate.graphNEL, rip.graphNEL)
 
-export(cliqueVarianceTest, cliqueMeanTest, getGraphEntryGenes, getJunctionTreePaths, pathQ, clipper, prunePaths, easyClip, plotInCytoscape, nameCliques, deleteEdge, easyLook)
+export(cliqueVarianceTest, cliqueMeanTest, cliqueMixedTest, getGraphEntryGenes, getJunctionTreePaths, pathQ, clipper, prunePaths, easyClip, plotInCytoscape, nameCliques, deleteEdge, easyLook, clipperAllRoots, cliquePairedTest)
+

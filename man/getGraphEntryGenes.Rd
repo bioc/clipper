@@ -6,9 +6,11 @@
 \usage{getGraphEntryGenes(graph, byCliques=FALSE, root=NULL)}
 \arguments{
   \item{graph}{a \code{graphNEL} object.}
-  \item{byCliques}{when TRUE it returns a list where entry point are organized by cliques.}
+  \item{byCliques}{when TRUE it returns a list where entry point are
+    organized by cliques.}
   \item{root}{nodes by which rip ordering is performed (as far as possible) on the variables using the maximum cardinality search algorithm.}
 }
+
 \value{a vector of gene names representing the entry point of graph.}
 
 \references{

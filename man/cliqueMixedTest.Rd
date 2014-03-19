@@ -1,9 +1,10 @@
-\name{cliqueMeanTest}
-\alias{cliqueMeanTest}
+\name{cliqueMixedTest}
+\alias{cliqueMixedTest}
 \title{Mean test for cliques.}
-\description{It decomposes the graph in cliques and performs the mean test in every one.}
-\usage{cliqueMeanTest(expr, classes, graph, nperm, alphaV=0.05, b=100,
-root=NULL, permute=TRUE, alwaysShrink=FALSE)}
+\description{It decomposes the graph in cliques and performs the
+  combination of mean e variance test in every one.}
+\usage{cliqueMixedTest(expr, classes, graph, nperm, alphaV=0.05, b=100,
+root=NULL, permute=TRUE)}
 \arguments{
   \item{expr}{an expression  matrix or ExpressionSet with colnames for
     samples and row name for genes.}
@@ -19,10 +20,15 @@ root=NULL, permute=TRUE, alwaysShrink=FALSE)}
     matrix test. If FALSE, the test is made using the asymptotic
     distribution of the log-likelihood ratio. This option should be use
     only if samples size is >=40 per class.}
-  \item{alwaysShrink}{always perform the shrinkage estimates of
-    variance.}
 }
-\value{a list with alphas (vector of cliques pvalues based on the mean test) and cliques (list of the cliques and related elements).}
+\value{a list with alphas (vector of cliques pvalues based on the variance test) and cliques (list of the cliques and related elements).}
+
+\details{
+  The method combines the results obtained from the mean and
+  variance test. In particular it assign to the cliques the minimum of
+  mean and variance p-values.
+}
+
 
 \references{
   Martini P, Sales G, Massa MS, Chiogna M, Romualdi C. Along signal
