@@ -26,7 +26,7 @@ importFrom(corpcor, cov.shrink)
 importFrom(qpgraph, qpIPF)
 importFrom(igraph, igraph.from.graphNEL, get.edgelist, get.all.shortest.paths, graph)
 importFrom(RBGL, maxClique)
-importFrom(gRbase, moralize.graphNEL, triangulate.graphNEL, rip.graphNEL)
+import(gRbase)
 
 export(cliqueVarianceTest, cliqueMeanTest, cliqueMixedTest, getGraphEntryGenes, getJunctionTreePaths, pathQ, clipper, prunePaths, easyClip, plotInCytoscape, nameCliques, deleteEdge, easyLook, clipperAllRoots, cliquePairedTest)
 

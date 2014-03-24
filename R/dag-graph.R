@@ -19,9 +19,9 @@ extractCliquesFromDag <- function(dag, root=NULL) {
   if (sum(diag(as(dag,"matrix")))!=0){
     dag <- removeSelfLoops(dag)
   }
-  moral <- moralize.graphNEL(dag)
-  tg    <- triangulate.graphNEL(moral)
-  ripped <- rip.graphNEL(tg, root=root)
+  moral <- moralize(dag)
+  tg    <- triangulate(moral)
+  ripped <- rip(tg, root=root)
   if (length(ripped)==0)
     return(NULL)
   ripped$cliques
