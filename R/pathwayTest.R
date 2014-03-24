@@ -19,9 +19,9 @@ runPathwayVar <- function(expr, classes, graph, nperm, permute) {
   e1 <- expr[classes==2,, drop=FALSE]
   e2 <- expr[classes==1,, drop=FALSE]
   
-  adj <- as(moralize.graphNEL(graph), "matrix")
+  adj <- as(moralize(graph), "matrix")
 
-  cliques <- maxClique(moralize.graphNEL(graph))$maxCliques
+  cliques <- maxClique(moralize(graph))$maxCliques
   cliques <- lapply(cliques, function(x) match(x, nodes(graph)))
   
   maxcliques <- max(sapply(cliques, length))
