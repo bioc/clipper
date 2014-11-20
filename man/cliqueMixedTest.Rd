@@ -4,7 +4,7 @@
 \description{It decomposes the graph in cliques and performs the
   combination of mean e variance test in every one.}
 \usage{cliqueMixedTest(expr, classes, graph, nperm, alphaV=0.05, b=100,
-root=NULL, permute=TRUE)}
+root=NULL, permute=TRUE, alwaysShrink=FALSE)}
 \arguments{
   \item{expr}{an expression  matrix or ExpressionSet with colnames for
     samples and row name for genes.}
@@ -20,6 +20,8 @@ root=NULL, permute=TRUE)}
     matrix test. If FALSE, the test is made using the asymptotic
     distribution of the log-likelihood ratio. This option should be use
     only if samples size is >=40 per class.}
+  \item{alwaysShrink}{always perform the shrinkage estimates of
+    variance.}
 }
 \value{a list with alphas (vector of cliques pvalues based on the variance test) and cliques (list of the cliques and related elements).}
 

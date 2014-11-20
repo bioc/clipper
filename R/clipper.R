@@ -26,7 +26,7 @@ runCoreClipper <- function(cliqueTest, pathList, trZero, thr, maxGap){
   })
 }
 
-clipper <- function(expr, classes, graph, method=c("variance","mean","both", "paired"), nperm=100, alphaV=0.05, b=100, root=NULL, trZero=0.001, signThr=0.05, maxGap=1, permute=TRUE){
+clipper <- function(expr, classes, graph, method=c("variance","mean","both", "paired"), nperm=100, alphaV=0.05, b=100, root=NULL, trZero=0.001, signThr=0.05, maxGap=1, permute=TRUE, alwaysShrink=FALSE){
   expr <- t(getExpression(expr, classes))
   expGenes <- row.names(expr)
   genes <- nodes(graph)
@@ -41,7 +41,7 @@ clipper <- function(expr, classes, graph, method=c("variance","mean","both", "pa
                both     = cliqueMixedTest,
                paired   = cliquePairedTest)
   
-  ct <- fu(expr, classes, graph, nperm, alphaV, b, root, permute)
+  ct <- fu(expr, classes, graph, nperm, alphaV, b, root, permute, alwaysShrink)
 
   if (is.null(ct)){
     return(NULL)
@@ -65,7 +65,7 @@ clipper <- function(expr, classes, graph, method=c("variance","mean","both", "pa
   as.data.frame(clipped, stringsAsFactors=FALSE)
 }
 
-clipperAllRoots <- function(expr, classes, graph, method=c("variance","mean","both", "paired"), nperm=100, alphaV=0.05, b=100, trZero=0.001, signThr=0.05, maxGap=1, permute=TRUE){
+clipperAllRoots <- function(expr, classes, graph, method=c("variance","mean","both", "paired"), nperm=100, alphaV=0.05, b=100, trZero=0.001, signThr=0.05, maxGap=1, permute=TRUE, alwaysShrink=FALSE){
   expr <- t(getExpression(expr, classes))
   expGenes <- row.names(expr)
   genes <- nodes(graph)
@@ -90,7 +90,7 @@ clipperAllRoots <- function(expr, classes, graph, method=c("variance","mean","bo
   
   allTests <- lapply(roots, function(root) {
     
-    ct <- fu(expr, classes, graph, nperm, alphaV, b, root, permute)
+    ct <- fu(expr, classes, graph, nperm, alphaV, b, root, permute, alwaysShrink)
     if (is.null(ct)){
       return(NULL)
     }
