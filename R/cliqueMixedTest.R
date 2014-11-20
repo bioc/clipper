@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
-cliqueMixedTest <- function(expr, classes, graph, nperm, alphaV=0.05, b=100, root=NULL, permute=TRUE) {
+cliqueMixedTest <- function(expr, classes, graph, nperm, alphaV=0.05, b=100, root=NULL, permute=TRUE, alwaysShrink=FALSE) {
   expr    <- getExpression(expr, classes)
 
   genes <- nodes(graph)
@@ -27,7 +27,7 @@ cliqueMixedTest <- function(expr, classes, graph, nperm, alphaV=0.05, b=100, roo
   graph <- subGraph(genes, graph)
   expr <- expr[, genes, drop=FALSE]
   
-  cvt     <- runVarianceTest(expr, classes, graph, nperm, root, permute)
+  cvt     <- runVarianceTest(expr, classes, graph, nperm, root, permute, alwaysShrink)
 
   if (is.null(cvt)){
     return(NULL)

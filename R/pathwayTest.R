@@ -120,7 +120,7 @@ pathQ <- function(expr, classes, graph, nperm=100, alphaV=0.05, b=100, permute=T
 
   if (paired) {
     
-    stat.obs <- hotePaired(exp1, exp2, cli.moral)
+    stat.obs <- hotePaired(exp1, exp2, cli.moral, FALSE, alwaysShrink)
     
     stat.perm <- vector("numeric", nperm)
     
@@ -133,7 +133,7 @@ pathQ <- function(expr, classes, graph, nperm=100, alphaV=0.05, b=100, permute=T
     
   } else {
     
-    stat.obs  <- hoteIPF(exp1, exp2, check, cli.moral)
+    stat.obs  <- hoteIPF(exp1, exp2, check, cli.moral, alwaysShrink)
     stat.perm <- vector("numeric", nperm)
     
     for (i in seq_len(nperm)) {

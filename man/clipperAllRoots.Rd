@@ -7,7 +7,7 @@
   phenotype under study.}
 \usage{clipperAllRoots(expr, classes, graph, method=c("variance","mean",
 "both", "paired"), nperm=100, alphaV=0.05, b=100, trZero=0.001, signThr=0.05,
-maxGap=1, permute=TRUE)}
+maxGap=1, permute=TRUE, alwaysShrink=FALSE)}
 \arguments{
   \item{expr}{an expression  matrix or ExpressionSet with colnames for
     samples and row name for genes.}
@@ -28,6 +28,8 @@ maxGap=1, permute=TRUE)}
     matrix test. If FALSE, the test is made using the asymptotic
     distribution of the log-likelihood ratio. This option should be use
     only if samples size is >=40 per class.}
+  \item{alwaysShrink}{always perform the shrinkage estimates of
+    variance.}
 }
 
 \details{
