@@ -14,6 +14,7 @@
 
 \examples{
 if (require(graphite)) {
+  kegg  <- pathways("hsapiens", "kegg")
   graph <- pathwayGraph(convertIdentifiers(kegg$'Chronic myeloid leukemia', "entrez"))
   head(edges(graph))
   ## We are going to remove the edge 1026-1019

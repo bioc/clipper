@@ -28,8 +28,14 @@ plotInCytoscape(graph, path, color="#6699FF", main="graph", layout="jgraph-sprin
 \examples{
 
 \dontrun{if (require(graphite)) {
-  graph <- pathwayGraph(convertIdentifiers(kegg$'Chronic myeloid leukemia', "entrez"))
+  if (requireNamespace("RCytoscape")){
+    kegg  <- pathways("hsapiens", "kegg")
+    graph <- pathwayGraph(convertIdentifiers(kegg$'Chronic myeloid leukemia', "entrez"))
 }
-path <- c(3,17,5,9,13.04,2.60,0.209,0.321,"6,7,8,9,10","3,5,6,7,8,9,10,14,17","1029;4193;7157","1019;1021;1026;1029;595")
-plotInCytoscape(graph,path)}
+    path <-
+  c(3,17,5,9,13.04,2.60,0.209,0.321,"6,7,8,9,10","3,5,6,7,8,9,10,14,17",
+"1029;4193;7157","1019;1021;1026;1029;595")
+plotInCytoscape(graph,path)
+    }
+  }
 }
