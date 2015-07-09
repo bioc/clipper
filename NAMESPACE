@@ -24,7 +24,7 @@ importMethodsFrom(Biobase, exprs)
 
 importFrom(corpcor, cov.shrink)
 importFrom(qpgraph, qpIPF)
-importFrom(igraph, igraph.from.graphNEL, get.edgelist, get.all.shortest.paths, graph)
+importFrom(igraph, as_ids, igraph.from.graphNEL, get.edgelist, get.all.shortest.paths, graph)
 importFrom(RBGL, maxClique)
 
 import(gRbase)

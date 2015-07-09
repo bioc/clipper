@@ -62,6 +62,7 @@ We use the \textit{graphite} bioconductor R package as a source of pathway topol
 
 <<loadGraphitePathways>>=
 library(graphite)
+kegg  <- pathways("hsapiens", "kegg")
 graph <- convertIdentifiers(kegg[["Chronic myeloid leukemia"]], "entrez")
 graph <- pathwayGraph(graph)
 genes <- nodes(graph)

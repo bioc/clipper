@@ -58,9 +58,9 @@ bestFragmentOnPath <- function(pvalues, trZero, thr, gaps){
   signs[pvalues <= thr] <- 1
   
   pvalueInverted <- pvalues
-  pvalueInverted[pvalues > thr] <- 1-pvalues[pvalues > thr] ## Inverts pvalues above thr
+  pvalueInverted[pvalues > thr] <- 1-pvalues[pvalues > thr]
   
-  startingPoints <- which(pvalues <= thr)  ## Define the starting cliques
+  startingPoints <- which(pvalues <= thr)
   
   if (length(startingPoints) == 0)
     return(list(best=NA, indices=paste("No cliques with pvalue <= ", thr, sep="")))
@@ -70,26 +70,26 @@ bestFragmentOnPath <- function(pvalues, trZero, thr, gaps){
 
 completeFormat <- function(subPath, alpha, path, trZero){
   clNames <- names(alpha)
-  l <- length(path)          ## lunghezza globale della via non del frammento
+  l <- length(path)
   
-  wayCliques <- paste(path, collapse=",")               ## cliques della via ordinata per lo "start" coinvolte
+  wayCliques <- paste(path, collapse=",")
   wayGenes <- paste(clNames[path], collapse=",")
   
   if (any(is.na(subPath$best)))
     return(c(path[1],tail(path,1),NA,l,NA,NA,NA,NA,NA,
              wayCliques,NA,wayGenes))
 
-  cumulative <- subPath$best    ## cumulativa del frammento megliore
-  indices    <- subPath$indices ## indici dei pvalue della via migliore cioè di alphaTopo[le]
+  cumulative <- subPath$best
+  indices    <- subPath$indices
   maxScore <- max(cumulative)
-  idxMax <- match(maxScore,cumulative)  ## clique index dove c'è il massimo
-  ## cat(maxScore, "\t", idxMax, "\n")
-  score <- maxScore * idxMax / l                      ## score = massimo * (posizione del picco / lunghezza totale)
-  averageScore <- maxScore / l                        ## score medio
-  impactOnPath <- l / length(alpha)               ## Impatto della via sul pathway totale
-  teoricalScore <- -log(trZero) * l                   ## score se la via fosse tutta significativa
+  idxMax <- match(maxScore,cumulative)
 
-  involvedCliques <- paste(path[indices], collapse=",") ## cliques della via ordinata per lo "start" coinvolte
+  score <- maxScore * idxMax / l
+  averageScore <- maxScore / l
+  impactOnPath <- l / length(alpha)
+  teoricalScore <- -log(trZero) * l
+
+  involvedCliques <- paste(path[indices], collapse=",")
   involvedGenes <- paste(clNames[path[indices]], collapse=";")
   
   c(path[1],

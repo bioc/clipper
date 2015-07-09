@@ -36,6 +36,7 @@ permute=TRUE, paired=FALSE, alwaysShrink=FALSE)}
 
 \examples{
 if (require(graphite) & require(ALL)){
+  kegg  <- pathways("hsapiens", "kegg")
   graph <- pathwayGraph(convertIdentifiers(kegg$'Chronic myeloid leukemia', "entrez"))
   genes <- nodes(graph)
   data(ALL)

@@ -22,6 +22,7 @@
 
 \examples{
 if (require(graphite)) {
+  kegg  <- pathways("hsapiens", "kegg")
   graph <- pathwayGraph(convertIdentifiers(kegg$'Chronic myeloid leukemia', "entrez"))
   getJunctionTreePaths(graph)
 }

@@ -46,7 +46,9 @@ getJunctionTreePaths <- function(graph, root=NULL) {
 
   paths <- NULL
   for (s in startingCliques) {
-    paths <- c(paths, get.all.shortest.paths(junctionTree, s, endingCliques)$res)
+      shPaths <- get.all.shortest.paths(junctionTree, s, endingCliques)$res
+      shPaths <- lapply(shPaths, as_ids)
+      paths <- c(paths, shPaths)
   }
   return(paths)
 }

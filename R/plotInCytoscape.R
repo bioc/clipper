@@ -16,27 +16,29 @@
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
 plotInCytoscape <- function(graph, path, color="#6699FF", main="graph", layout="jgraph-spring"){
-  path <- as.character(path)
-  genesInvolved <- retrieveInvolvedGenes(path)
-  if (!require(RCytoscape))
-    stop("the RCytoscape package is missing")
+    if(requireNamespace("RCytoscape", quitely=TRUE)) {
+           path <- as.character(path)
+           genesInvolved <- retrieveInvolvedGenes(path)
+           
+           g <- markMultiple(graph)
+           g <- RCytoscape::initEdgeAttribute(g, "edgeType", "char", "undefined")
+           g <- RCytoscape::initEdgeAttribute(g, "weight", "numeric", 1)
+           
+           cy <- RCytoscape::CytoscapeConnection()
+           
+           if (main %in% as.character(RCytoscape::getWindowList(cy)))
+               RCytoscape::deleteWindow(cy, main)
+           
+           w <- RCytoscape::new.CytoscapeWindow(main, g)
+           RCytoscape::deleteNodeAttribute(w,"node.fillColor")
+           RCytoscape::displayGraph(w)
   
-  g <- markMultiple(graph)
-  g <- initEdgeAttribute(g, "edgeType", "char", "undefined")
-  g <- initEdgeAttribute(g, "weight", "numeric", 1)
-  
-  cy <- CytoscapeConnection()
-
-  if (main %in% as.character(getWindowList(cy)))
-    deleteWindow(cy, main)
-  
-  w <- new.CytoscapeWindow(main, g)
-  deleteNodeAttribute(w,"node.fillColor")
-  displayGraph(w)
-  
-  setNodeColorDirect(w, genesInvolved, color)
-  layoutNetwork(w, layout.name=layout)
-  redraw(w)
+           RCytoscape::setNodeColorDirect(w, genesInvolved, color)
+           RCytoscape::layoutNetwork(w, layout.name=layout)
+           RCytoscape::redraw(w)
+       } else {
+           stop("Package RCytoscape not installed. Please install.")
+       }
 }
 
 markMultiple <- function(g) {

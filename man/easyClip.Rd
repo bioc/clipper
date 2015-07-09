@@ -8,7 +8,9 @@
   an expression matrix and a pathway, these function extact the most
   transcriptionally altered portions of the graph.}
 
-\usage{easyClip(expr, classes, graph, method=c("variance","mean"), pathThr=0.05, pruneLevel=0.2, nperm=100, alphaV=0.05, b=100, root=NULL, trZero=0.001, signThr=0.05, maxGap=1, permute=TRUE)}
+\usage{easyClip(expr, classes, graph, method=c("variance","mean"),
+pathThr=0.05, pruneLevel=0.2, nperm=100, alphaV=0.05, b=100,
+root=NULL, trZero=0.001, signThr=0.05, maxGap=1, permute=TRUE)}
 
 \arguments{
   \item{expr}{an expression  matrix or ExpressionSet with colnames for
@@ -67,6 +69,7 @@
 
 \examples{
 if (require(graphite) & require(ALL)){
+  kegg  <- pathways("hsapiens", "kegg")
   graph <- pathwayGraph(convertIdentifiers(kegg$'Chronic myeloid leukemia', "entrez"))
   genes <- nodes(graph)
   data(ALL)
