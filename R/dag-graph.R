@@ -19,7 +19,7 @@ extractCliquesFromDag <- function(dag, root=NULL) {
   if (sum(diag(as(dag,"matrix")))!=0){
     dag <- removeSelfLoops(dag)
   }
-  moral <- moralize(dag)
+  moral <- mmmoralize(dag)
   tg    <- triangulate(moral)
   ripped <- rip(tg, root=root)
   if (length(ripped)==0)

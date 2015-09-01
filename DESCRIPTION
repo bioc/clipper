@@ -1,6 +1,6 @@
 Package:     clipper
-Version:     1.9.1
-Date:        2015-07-09
+Version:     1.9.2
+Date:        2015-08-31
 Title:       Gene Set Analysis Exploiting Pathway Topology
 Author:      Paolo Martini <paolo.cavei@gmail.com>, Gabriele Sales <gabriele.sales@unipd.it>, Chiara Romualdi <chiara.romualdi@unipd.it>
 Maintainer:  Paolo Martini <paolo.cavei@gmail.com>
@@ -9,4 +9,3 @@ Depends:     R (>= 2.15.0), Matrix, graph
 Imports:     methods,  Biobase, Rcpp, igraph, gRbase (>= 1.6.6), qpgraph, KEGGgraph, corpcor, RBGL
 Suggests:    RUnit, BiocGenerics, RCytoscape (>= 1.6.3), graphite, ALL, hgu95av2.db, MASS, BiocStyle
 License:     AGPL-3
-biocViews:   GeneExpression, Pathways, KEGG, GraphAndNetwork
