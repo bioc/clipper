@@ -26,6 +26,8 @@ importFrom(corpcor, cov.shrink)
 importFrom(qpgraph, qpIPF)
 importFrom(igraph, as_ids, igraph.from.graphNEL, get.edgelist, get.all.shortest.paths, graph)
 importFrom(RBGL, maxClique)
+importFrom("grDevices", "dev.off", "pdf")
+importFrom("stats", "as.dist", "cov", "cutree", "hclust", "pchisq","pf", "qchisq", "t.test")
 
 import(gRbase)
 

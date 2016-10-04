@@ -183,6 +183,7 @@ clipped[,1:5]
 After the pruning, the results are smaller and much clear to read and interpret.
 
 \section{Visualizing clipper results.}
+WARNING: RCytoscape is no longer support in some Platform.
 \textit{clipper} uses the \textit{RCytoscape} package to connect to Cytoscape and display its results. Cytoscape is a Java based software specifically built to manage biological network complexity and for this reason it is widely used by the biological community.
 
 \begin{Schunk}
