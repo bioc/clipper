@@ -120,9 +120,13 @@ all <- ALL[,names(classes)]
 probesIDS <- row.names(exprs(all))
 featureNames(all@assayData)<-unlist(mget(probesIDS, hgu95av2ENTREZID))
 all <- all[(!is.na(row.names(exprs(all))))]
+@
+
+To be compliant with graphite we need to explicit in the row names that the IDs are EntrezGene.
+<<>>=
+all_rnames <- featureNames(all@assayData)
+featureNames(all@assayData) <- paste("ENTREZID", all_rnames, sep = ":")
 @ 
-
-
 
 At this point, we compute the intersection between pathway nodes and the genes for which an expression value is available. Thus we obtain a subgraph of the original graph. Moreover, we can extract from the expression set a smaller expression set corresponding to the expression of the genes in the pathway under investigation.
 <<obtainingTheSubgraph>>=
@@ -183,8 +187,8 @@ clipped[,1:5]
 After the pruning, the results are smaller and much clear to read and interpret.
 
 \section{Visualizing clipper results.}
-WARNING: RCytoscape is no longer support in some Platform.
-\textit{clipper} uses the \textit{RCytoscape} package to connect to Cytoscape and display its results. Cytoscape is a Java based software specifically built to manage biological network complexity and for this reason it is widely used by the biological community.
+WARNING: RCytoscape is no longer support in some Platform so we use RCy3.
+\textit{clipper} uses the \textit{RCy3} package to connect to Cytoscape and display its results. Cytoscape is a Java based software specifically built to manage biological network complexity and for this reason it is widely used by the biological community.
 
 \begin{Schunk}
 \begin{Sinput}

@@ -18,6 +18,6 @@ if (require(graphite)) {
   graph <- pathwayGraph(convertIdentifiers(kegg$'Chronic myeloid leukemia', "entrez"))
   head(edges(graph))
   ## We are going to remove the edge 1026-1019
-  head(edges(deleteEdge(graph, "1026", "1019")))
+  head(edges(deleteEdge(graph, "ENTREZID:1026", "ENTREZID:1019")))
 }
 }
