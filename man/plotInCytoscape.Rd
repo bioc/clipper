@@ -6,7 +6,7 @@
   genes of the selected path.
 }
 \usage{
-plotInCytoscape(graph, path, color="#6699FF", main="graph", layout="force-directed")
+plotInCytoscape(graph, path, color="#6699FF", main="graph")
 }
 \arguments{
   \item{graph}{a \code{graphNEL} object.}
@@ -15,8 +15,6 @@ plotInCytoscape(graph, path, color="#6699FF", main="graph", layout="force-direct
   \item{color}{color code string: genes of the most involved fragment will be colored using
     color. Deafult = "#6699FF"}
   \item{main}{a graph name to be used in Cytoscape. Default = 'graph'}
-  \item{layout}{a 'string' of choice among the values returned by
-    'getLayoutNames', default = 'force-directed'}
 }
 \details{
   Requires the \code{RCy3} package.
