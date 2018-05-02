@@ -73,11 +73,10 @@ if (require(graphite) & require(ALL)){
   graph <- pathwayGraph(convertIdentifiers(kegg$'Chronic myeloid leukemia', "entrez"))
   genes <- nodes(graph)
   data(ALL)
-  all <- ALL[1:length(genes),1:20]
-  classes <- c(rep(1,10), rep(2,10))
+  all <- ALL[1:length(genes),1:24]
+  classes <- c(rep(1,12), rep(2,12))
   featureNames(all@assayData)<- genes
   graph <- subGraph(genes, graph)
-  clipped <- easyClip(all, classes, graph, nperm=10)
-  clipped[,1:5]
+  easyClip(all, classes, graph, nperm=10)
 }
 }
