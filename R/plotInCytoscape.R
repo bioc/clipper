@@ -15,36 +15,25 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
-plotInCytoscape <- function(graph, path, color="#6699FF", main="graph", layout="force-directed"){
+plotInCytoscape <- function(graph, path, color="#6699FF", main="graph"){
     if(requireNamespace("RCy3", quitely=TRUE)) {
-           path <- as.character(path)
-           genesInvolved <- retrieveInvolvedGenes(path)
-           
-           g <- markMultiple(graph)
-           g <- RCy3::initEdgeAttribute(g, "edgeType", "char", "undefined")
-           g <- RCy3::initEdgeAttribute(g, "weight", "numeric", 1)
-           
-           cy <- RCy3::CytoscapeConnection()
-
-           possible.layout.names <- RCy3::getLayoutNames(cy)
-           if (!layout %in% possible.layout.names) {
-               warning(paste0("Layout \"",layout,"\" not found. Grid layout setted. Please chose one of the following. \n", paste(possible.layout.names, collapse=", ")))
-               layout="grid"
-           }
-           
-           if (main %in% as.character(RCy3::getWindowList(cy)))
-               RCy3::deleteWindow(cy, main)
-           
-           w <- RCy3::CytoscapeWindow(main, g)
-           RCy3::deleteNodeAttribute(w,"node.fillColor")
-           RCy3::displayGraph(w)
-  
-           RCy3::setNodeColorDirect(w, genesInvolved, color)
-           RCy3::layoutNetwork(w, layout.name=layout)
-           RCy3::redraw(w)
-       } else {
-           stop("Package RCy3 not installed. Please install.")
-       }
+        try(RCy3::deleteNetwork(main), silent = TRUE)
+        path <- as.character(path)
+        genesInvolved <- retrieveInvolvedGenes(path)
+        
+        g <- markMultiple(graph)
+        suid <- RCy3::createNetworkFromGraph(g, main)
+        
+        genes <- nodes(g)
+        nodesAttrib <- data.frame(id = genes, label = sub("^[^:]*:", "", genes),
+                                  type = sub(":.*", "", genes), stringsAsFactors = FALSE)
+        RCy3::loadTableData(nodesAttrib, "id", "node")
+        RCy3::setNodeLabelMapping("label")
+        RCy3::setNodeShapeMapping("type", nodesAttrib$type, nodesAttrib$shape)
+        invisible(list(graph = g, suid = suid))
+    } else {
+        stop("Package RCy3 not installed. Please install.")
+    }
 }
 
 markMultiple <- function(g) {

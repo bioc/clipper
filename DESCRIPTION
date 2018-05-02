@@ -1,6 +1,6 @@
 Package:     clipper
-Version: 1.21.0
-Date:        2016-09-04
+Version: 1.21.1
+Date:        2018-05-02
 Title:       Gene Set Analysis Exploiting Pathway Topology
 Author:      Paolo Martini <paolo.cavei@gmail.com>, Gabriele Sales <gabriele.sales@unipd.it>, Chiara Romualdi <chiara.romualdi@unipd.it>
 Maintainer:  Paolo Martini <paolo.cavei@gmail.com>
