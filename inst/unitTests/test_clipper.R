@@ -31,7 +31,7 @@ classes<-c(rep(2,20), rep(1,20))
 exp <- cbind(exp1, exp2)
 
 test_clipper <- function(){
-  set.seed(1432)
+  set.seed(123)
   clipped <- clipper(exp, classes, method="var",graph, 100)
   checkEqualsNumeric(-log(0.001)*2, as.numeric(clipped[1,5]))
   checkEqualsNumeric(c(1,12), dim(clipped))
