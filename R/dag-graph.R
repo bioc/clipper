@@ -16,7 +16,7 @@
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
 extractCliquesFromDag <- function(dag, root=NULL) {
-  if (sum(diag(as(dag,"matrix")))!=0){
+  if (sum(diag(as(dag,"TsparseMatrix")))!=0){
     dag <- removeSelfLoops(dag)
   }
   moral <- mmmoralize(dag)

@@ -30,7 +30,9 @@ plotInCytoscape(graph, path, color="#6699FF", main="graph")
     kegg  <- pathways("hsapiens", "kegg")
     graph <- pathwayGraph(convertIdentifiers(kegg$'Chronic myeloid leukemia', "entrez"))
 }
-    path <- c(3,17,5,9,13.04,2.60,0.209,0.321,"6,7,8,9,10","3,5,6,7,8,9,10,14,17","ENTREZID:1029;ENTREZID:4193;ENTREZID:7157","ENTREZID:1019;ENTREZID:1021;ENTREZID:1026;ENTREZID:1029;ENTREZID:595")
+    path <- c(3,17,5,9,13.04,2.60,0.209,0.321,"6,7,8,9,10",
+    "3,5,6,7,8,9,10,14,17", "ENTREZID:1029;ENTREZID:4193;ENTREZID:7157",
+    "ENTREZID:1019;ENTREZID:1021;ENTREZID:1026;ENTREZID:1029;ENTREZID:595")
 plotInCytoscape(graph,path)
     }
   }
