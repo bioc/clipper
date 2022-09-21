@@ -19,7 +19,7 @@ runPathwayVar <- function(expr, classes, graph, nperm, permute, alwaysShrink) {
   e1 <- expr[classes==2,, drop=FALSE]
   e2 <- expr[classes==1,, drop=FALSE]
   
-  adj <- as(mmmoralize(graph), "matrix")
+  adj <- as(mmmoralize(graph), "TsparseMatrix")
 
   cliques <- maxClique(mmmoralize(graph))$maxCliques
   cliques <- lapply(cliques, function(x) match(x, nodes(graph)))
@@ -113,6 +113,7 @@ pathQ <- function(expr, classes, graph, nperm=100, alphaV=0.05, b=100, permute=T
     warning("Test on the concentration matrix is not calculable.")
     return(NA)
   }
+  
   exp1 <- expr[classes==2,, drop=FALSE]
   exp2 <- expr[classes==1,, drop=FALSE]
 
