@@ -19,10 +19,10 @@ runPathwayVar <- function(expr, classes, graph, nperm, permute, alwaysShrink) {
   e1 <- expr[classes==2,, drop=FALSE]
   e2 <- expr[classes==1,, drop=FALSE]
   
-  adj <- as(mmmoralize(graph), "TsparseMatrix")
+  adj <- igraph::as_adjacency_matrix(mmmoralize(graph))
 
-  cliques <- maxClique(mmmoralize(graph))$maxCliques
-  cliques <- lapply(cliques, function(x) match(x, nodes(graph)))
+  cliques <- gRbase::maxClique(mmmoralize(graph))$maxCliques
+  cliques <- lapply(cliques, function(x) match(x, graphite::nodes(graph)))
   
   maxcliques <- max(sapply(cliques, length))
 
@@ -97,13 +97,13 @@ pathQ <- function(expr, classes, graph, nperm=100, alphaV=0.05, b=100, permute=T
     }
   }
   
-  genes <- nodes(graph)
+  genes <- graphite::nodes(graph)
   genes <- intersect(genes, colnames(expr))
 
   if (length(genes)== 0)
     stop("There is no intersection between expression feature names and the node names on the graph.")
 
-  graph <- subGraph(genes, graph)
+  graph <- KEGGgraph::subGraph(genes, graph)
   expr <- expr[, genes, drop=FALSE]
   
   varTest <- runPathwayVar(expr, classes, graph, nperm, permute, alwaysShrink)

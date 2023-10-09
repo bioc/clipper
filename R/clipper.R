@@ -29,11 +29,11 @@ runCoreClipper <- function(cliqueTest, pathList, trZero, thr, maxGap){
 clipper <- function(expr, classes, graph, method=c("variance","mean","both", "paired"), nperm=100, alphaV=0.05, b=100, root=NULL, trZero=0.001, signThr=0.05, maxGap=1, permute=TRUE, alwaysShrink=FALSE){
   expr <- t(getExpression(expr, classes))
   expGenes <- row.names(expr)
-  genes <- nodes(graph)
+  genes <- graphite::nodes(graph)
   genes <- intersect(genes, expGenes)
   if (length(genes)== 0)
     stop("There is no intersection between expression feature names and the node names on the graph.")
-  graph <- subGraph(genes, graph)
+  graph <- KEGGgraph::subGraph(genes, graph)
   method <- match.arg(method)
   fu <- switch(method,
                variance = cliqueVarianceTest,
@@ -68,11 +68,11 @@ clipper <- function(expr, classes, graph, method=c("variance","mean","both", "pa
 clipperAllRoots <- function(expr, classes, graph, method=c("variance","mean","both", "paired"), nperm=100, alphaV=0.05, b=100, trZero=0.001, signThr=0.05, maxGap=1, permute=TRUE, alwaysShrink=FALSE){
   expr <- t(getExpression(expr, classes))
   expGenes <- row.names(expr)
-  genes <- nodes(graph)
+  genes <- graphite::nodes(graph)
   genes <- intersect(genes, expGenes)
   if (length(genes)== 0)
     stop("There is no intersection between expression feature names and the node names on the graph.")
-  graph <- subGraph(genes, graph)
+  graph <- KEGGgraph::subGraph(genes, graph)
   
   method <- match.arg(method)
   fu <- switch(method,

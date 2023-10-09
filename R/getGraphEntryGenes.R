@@ -18,7 +18,7 @@
 getGraphEntryGenes <- function(graph, byCliques=FALSE, root=NULL){
   graphi <- igraph.from.graphNEL(graph)
   edgeM  <- get.edgelist(graphi)
-  genes  <- nodes(graph)
+  genes  <- graphite::nodes(graph)
   starts <- extractStarts(edgeM, genes)
 
   cliques <- extractCliquesFromDag(graph, root=root)

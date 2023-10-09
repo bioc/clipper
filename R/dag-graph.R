@@ -16,12 +16,13 @@
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
 extractCliquesFromDag <- function(dag, root=NULL) {
-  if (sum(diag(as(dag,"TsparseMatrix")))!=0){
+  idag <- igraph::igraph.from.graphNEL(dag)
+  if (sum(diag(igraph::as_adjacency_matrix(idag)))!=0){
     dag <- removeSelfLoops(dag)
   }
   moral <- mmmoralize(dag)
-  tg    <- triangulate(moral)
-  ripped <- rip(tg, root=root)
+  tg    <- gRbase::triangulate(moral)
+  ripped <- gRbase::rip(tg, root=root)
   if (length(ripped)==0)
     return(NULL)
   ripped$cliques

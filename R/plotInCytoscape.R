@@ -24,7 +24,7 @@ plotInCytoscape <- function(graph, path, color="#6699FF", main="graph"){
         g <- markMultiple(graph)
         suid <- RCy3::createNetworkFromGraph(g, main)
         
-        genes <- nodes(g)
+        genes <- graphite::nodes(g)
         nodesAttrib <- data.frame(id = genes, label = sub("^[^:]*:", "", genes),
                                   type = sub(":.*", "", genes), stringsAsFactors = FALSE)
         RCy3::loadTableData(nodesAttrib, "id", "node")

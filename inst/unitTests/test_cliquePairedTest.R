@@ -2,17 +2,17 @@ library(gRbase)
 library(MASS)
 
 graph <- dag(c("me","ve"),c("me","al"),c("ve","al"),c("al","an"),c("al","st"),c("an","st"))
-
+graph <- igraph::igraph.to.graphNEL(graph)
 set.seed(1234)
 
 sigma <- matrix(0,20,20)
 diag(sigma)<-1
 
 exp1 <-  mvrnorm(5, rep(5,20), sigma)
-row.names(exp1)<-nodes(graph)
+row.names(exp1)<-graphite::nodes(graph)
 
 exp2 <- mvrnorm(5, rep(5,20), sigma)
-row.names(exp2)<-nodes(graph)
+row.names(exp2)<-graphite::nodes(graph)
 
 colnames(exp1)<-LETTERS[1:20]
 colnames(exp2)<-letters[1:20]

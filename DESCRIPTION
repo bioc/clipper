@@ -6,7 +6,7 @@ Author:      Paolo Martini <paolo.cavei@gmail.com>, Gabriele Sales <gabriele.sal
 Maintainer:  Paolo Martini <paolo.cavei@gmail.com>
 Description: Implements topological gene set analysis using a two-step empirical approach. It exploits graph decomposition theory to create a junction tree and reconstruct the most relevant signal path. In the first step clipper selects significant pathways according to statistical tests on the means and the concentration matrices of the graphs derived from pathway topologies. Then, it "clips" the whole pathway identifying  the signal paths having the greatest association with a specific phenotype.
 Depends:     R (>= 2.15.0), Matrix, graph
-Imports:     methods,  Biobase, Rcpp, igraph, gRbase (>= 1.6.6), qpgraph, KEGGgraph, corpcor, RBGL
+Imports:     methods,  Biobase, Rcpp, igraph, gRbase (>= 1.6.6), qpgraph, KEGGgraph, corpcor
 Suggests:    RUnit, BiocGenerics, graphite, ALL, hgu95av2.db, MASS, BiocStyle
 Enhances:    RCy3
 License:     AGPL-3

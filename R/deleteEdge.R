@@ -17,7 +17,7 @@
 
 deleteEdge <- function(graph, from, to){
   edgeL <- graph@edgeL
-  vertex <- nodes(graph)
+  vertex <- graphite::nodes(graph)
   from <- as.character(from)
   to <- as.character(to)
 

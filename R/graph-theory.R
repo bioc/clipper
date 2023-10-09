@@ -16,7 +16,9 @@
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
 mmmoralize <- function(graph) {
-    m <- gRbase::graphNEL2M(graph)
+    g <- igraph::igraph.from.graphNEL(graph)
+    m <- igraph::as_adjacency_matrix(g, sparse=F)
     m <- gRbase::moralizeMAT(m)
-    gRbase::coerceGraph(m, "graphNEL")
+    g <- igraph::graph_from_adjacency_matrix(m, mode="directed")
+    g
 }

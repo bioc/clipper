@@ -47,13 +47,13 @@ cliquePairedTest <- function(expr, classes, graph, nperm, alphaV=0.05, b=100, ro
     stop("Your are working woth paired mode. The number of samples per class must be equal (and paired).")
   }
   
-  genes <- nodes(graph)
+  genes <- graphite::nodes(graph)
   genes <- intersect(genes, colnames(expr))
   
   if (length(genes)== 0)
     stop("There is no intersection between expression feature names and the node names on the graph.")
   
-  graph <- subGraph(genes, graph)
+  graph <- KEGGgraph::subGraph(genes, graph)
   expr <- expr[, genes, drop=FALSE]
   
   cvt     <- runVarianceTest(expr, classes, graph, nperm, root, permute, alwaysShrink)
