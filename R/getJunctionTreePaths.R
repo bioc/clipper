@@ -16,7 +16,9 @@
 # License along with clipper. If not, see <http://www.gnu.org/licenses/>.
 
 getJunctionTreePaths <- function(graph, root=NULL) {
-  if (sum(diag(Matrix::graph2T(graph)))!=0){
+  e <- edges(graph)
+  n <- nodes(graph)
+  if (any(rep.int(n, lengths(e)) == unlist(e))) {
     graph <- removeSelfLoops(graph)
   }
   ripped <- rip(triangulate(mmmoralize(graph)), root=root)
